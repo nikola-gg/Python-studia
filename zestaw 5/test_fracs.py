@@ -43,7 +43,6 @@ class TestFractions(unittest.TestCase):
         self.assertTrue(is_zero([0, 5]))
         self.assertFalse(is_zero([1, 5]))
 
-
     def test_cmp_frac(self):
         self.assertEqual(cmp_frac([1, 2], [2, 4]), 0)
         self.assertEqual(cmp_frac([1, 3], [1, 2]), -1)
@@ -57,6 +56,7 @@ class TestFractions(unittest.TestCase):
 
     def tearDown(self):
         pass
-    
+
 if __name__ == '__main__':
     unittest.main()
+    
