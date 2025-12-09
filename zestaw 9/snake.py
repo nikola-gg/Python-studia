@@ -11,8 +11,7 @@ Czerwony kwadrat = trujący owoc (-1 punkt, poniżej 0 = koniec gry)
 Czarny kwadrat = bomba (natychmiastowy koniec gry)
 Nie wolno zawracać.
 Plansza ma periodyczne warunki brzegowe.
-Z czasem rośnie prędkość (trochę szybciej).
-Na ekranie może być kilka jedzeń naraz, każde znika po losowym czasie.
+Z czasem rośnie prędkość.
 """
 
 pygame.init()
