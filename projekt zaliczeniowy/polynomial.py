@@ -17,6 +17,17 @@ class Polynomial:
         while len(self.coefficients) > 1 and self.coefficients[-1] == 0:
             self.coefficients.pop()
 
+    # zamiana 'other' na wielomian, jeśli jeszcze nim nie jest
+    @staticmethod
+    def _as_poly(other):
+        if isinstance(other, Polynomial):
+            return other
+        try:
+            return Polynomial([other])
+        except Exception:
+            return NotImplemented
+        
+
     # przydatne funkcje
 
     def is_zero(self):
@@ -40,9 +51,12 @@ class Polynomial:
 
     # dodawanie 
     def __add__(self, other):
+        other = self._as_poly(other)
+        if other is NotImplemented:
+            return NotImplemented
+
         max_len = max(len(self.coefficients), len(other.coefficients))
         result = []
-
         for i in range(max_len):
             result.append(self[i] + other[i])
 
@@ -50,9 +64,12 @@ class Polynomial:
 
     # odejmowanie
     def __sub__(self, other):
+        other = self._as_poly(other)
+        if other is NotImplemented:
+            return NotImplemented
+
         max_len = max(len(self.coefficients), len(other.coefficients))
         result = []
-
         for i in range(max_len):
             result.append(self[i] - other[i])
 
@@ -60,6 +77,10 @@ class Polynomial:
 
     # mnożenie
     def __mul__(self, other):
+        other = self._as_poly(other)
+        if other is NotImplemented:
+            return NotImplemented
+
         size = len(self.coefficients) + len(other.coefficients) - 1
         result = [0] * size
 
@@ -71,11 +92,17 @@ class Polynomial:
 
     # porównanie ====
     def __eq__(self, other):
+        other = self._as_poly(other)
+        if other is NotImplemented:
+            return NotImplemented
         return (self - other).is_zero()
 
     # porównanie !=
     def __ne__(self, other):
-        return not self == other
+        eq = self.__eq__(other)
+        if eq is NotImplemented:
+            return NotImplemented
+        return not eq
 
     # Horner
     def __call__(self, x):
@@ -131,3 +158,16 @@ class Polynomial:
             result.append(power * self.coefficients[power])
 
         return Polynomial(result)
+
+    # metody do obsługi: liczba + wielomian, liczba - wielomian, liczba * wielomian
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __rsub__(self, other):
+        other = self._as_poly(other)
+        if other is NotImplemented:
+            return NotImplemented
+        return other.__sub__(self)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)

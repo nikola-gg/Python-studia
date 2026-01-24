@@ -133,6 +133,47 @@ class TestPolynomial(unittest.TestCase):
         p = Polynomial([0, 0, 3, 0, 1])
         self.assertEqual(p.derivative(), Polynomial([0, 6, 0, 4]))
 
+    def test_add_number_right(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(p + 5, Polynomial([6, 2, 3]))
+
+    def test_add_number_left(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(5 + p, Polynomial([6, 2, 3]))
+
+    def test_sub_number_right(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(p - 2, Polynomial([-1, 2, 3]))
+
+    def test_sub_number_left(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(2 - p, Polynomial([1, -2, -3]))
+
+    def test_mul_number_right(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(p * 3, Polynomial([3, 6, 9]))
+
+    def test_mul_number_left(self):
+        p = Polynomial([1, 2, 3])
+        self.assertEqual(3 * p, Polynomial([3, 6, 9]))
+
+    def test_eq_number(self):
+        p = Polynomial([5, 0, 0])
+        self.assertTrue(p == 5)
+        self.assertTrue(5 == p)
+        self.assertFalse(p != 5)
+
+    def test_not_eq_number(self):
+        p = Polynomial([5, 1])
+        self.assertFalse(p == 5)
+        self.assertTrue(p != 5)
+
+    def test_operations_with_float(self):
+        p = Polynomial([1, 2])
+        self.assertEqual(p + 0.5, Polynomial([1.5, 2]))
+        self.assertEqual(0.5 + p, Polynomial([1.5, 2]))
+        self.assertEqual(p * 0.5, Polynomial([0.5, 1.0]))
+        self.assertEqual(0.5 * p, Polynomial([0.5, 1.0]))
 
 if __name__ == "__main__":
     unittest.main()

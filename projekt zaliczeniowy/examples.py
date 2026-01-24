@@ -43,3 +43,19 @@ print()
 
 print("Pochodna wielomianu p:")
 print("p'(x) =", p.derivative())
+print()
+
+
+print("Operacje z liczbą:")
+print("p + 5 =", p + 5)
+print("5 + p =", 5 + p)
+print("p - 2 =", p - 2)
+print("2 - p =", 2 - p)
+print("p * 3 =", p * 3)
+print("3 * p =", 3 * p)
+print()
+
+print("Porównywanie z liczbą:")
+print("p == 5 ?", p == 5)
+print("5 == Polynomial([5]) ?", 5 == Polynomial([5]))
+print()
